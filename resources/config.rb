@@ -1,4 +1,5 @@
-actions :install, :append
-default_action :append
+actions :install
+default_action :install
 
-attribute :source
+attribute :source, name_attribute: true
+attribute :variables, default: {}

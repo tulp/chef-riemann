@@ -31,12 +31,6 @@ action :install do
     dpkg_package cached_file
   end
   
-  riemann_service = runit_service 'riemann' do
-    supports :restart => true
-    default_logger true
-    cookbook 'riemann'
-  end
-
   directory "/etc/riemann/config.d" do
     owner riemann_user
   end
@@ -48,6 +42,13 @@ action :install do
     variables({
       host: new_resource.host
     })
+    cookbook 'riemann'
+  end
+
+  riemann_service = runit_service 'riemann' do
+    supports :restart => true
+    default_logger true
+    cookbook 'riemann'
   end
 
 end
